@@ -5,7 +5,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-entity gpu is 
+entity top_line is 
 	port (
 		Start: in std_logic;  -- start
 		CLK  : in std_logic;  -- clock
@@ -17,15 +17,15 @@ entity gpu is
 		X1p, Y1p : in std_logic_vector(31 downto 0);
 		pixel : out std_logic_vector(11 downto 0)
 		);
-end gpu;
+end top_line;
 
-architecture gpu of gpu is
+architecture top_line of top_line is
 	signal Ly0, Lx0 : std_logic;
-   signal Ldx, Ldy : std_logic;
+    signal Ldx, Ldy : std_logic;
   	signal Lsx, Lsy : std_logic;
-   signal Lerr, Le2: std_logic;
+    signal Lerr, Le2: std_logic;
 
-   signal Sy0, Sx0 : std_logic;
+    signal Sy0, Sx0 : std_logic;
   	signal Ssx, Ssy : std_logic;
   	signal Serr 	: std_logic_vector(1 downto 0);
   	signal Setpixel : std_logic;
@@ -35,7 +35,7 @@ architecture gpu of gpu is
 	signal inComp3 : std_logic; -- y0 < y1
 	signal inComp4 : std_logic; -- dx > dy
 	signal inComp5 : std_logic; -- e2 > -dx 
-	signal inComp6 : std_logic;  -- e2 < dy	
+	signal inComp6 : std_logic; -- e2 < dy	
 begin
 	S0: entity work.circ_line
 	port map(
@@ -100,4 +100,4 @@ begin
 		inComp5 => inComp5, 
 		inComp6 => inComp6
 		);
-end gpu;
+end top_line;

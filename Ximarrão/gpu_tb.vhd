@@ -6,22 +6,26 @@ entity gpu_tb is
 end gpu_tb; 
 
 architecture gpu_tb of gpu_tb is
-	signal clock, reset, start, wren : std_logic;
-	--signal x0, x1, y0, y1 : std_logic_vector(6 downto 0);
-	--signal p_param std_logic_vector(11 downto 0);
+	signal Start: std_logic; -- start
+	signal Reset: std_logic; -- reset
+	signal CLK  : std_logic; -- clock
+
+	-- parametros 
+	signal Y0p, X0p : std_logic_vector(31 downto 0); 
+	signal X1p, Y1p : std_logic_vector(31 downto 0);
+
 	signal addr : std_logic_vector(13 downto 0);
 	signal free : std_logic;
 	signal pixel_i : std_logic_vector(11 downto 0);
 	signal pixel_o : std_logic_vector(11 downto 0);
 	signal estado : std_logic_vector(3 downto 0);
 	
-begin
-
-	line : entity work.Line_alg
+begin 
+	gpu : entity work.gpu
 	port map(
-		clock => clock,
-		reset => reset,
-		start => start,
+		Start => Start,
+		CLK => CLK,
+		Reset => Reset,
 		p_param => "000000001111",
 		x0_param => "0000010",
 		x1_param => "0001101",
