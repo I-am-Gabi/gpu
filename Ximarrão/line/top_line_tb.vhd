@@ -2,10 +2,10 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity gpu_tb is
-end gpu_tb; 
+entity top_line_tb is
+end top_line_tb; 
 
-architecture gpu_tb of gpu_tb is
+architecture top_line_tb of top_line_tb is
 	signal Start: std_logic; -- start
 	signal Reset: std_logic; -- reset
 	signal CLK  : std_logic; -- clock
@@ -14,14 +14,14 @@ architecture gpu_tb of gpu_tb is
 	signal Y0p, X0p : std_logic_vector(31 downto 0); 
 	signal X1p, Y1p : std_logic_vector(31 downto 0);
 
-	signal addr : std_logic_vector(13 downto 0);
-	signal free : std_logic;
-	signal pixel_i : std_logic_vector(11 downto 0);
-	signal pixel_o : std_logic_vector(11 downto 0);
-	signal estado : std_logic_vector(3 downto 0);
+	signal addr 	: std_logic_vector(13 downto 0);
+	signal free 	: std_logic;
+	signal pixel_i 	: std_logic_vector(11 downto 0);
+	signal pixel_o 	: std_logic_vector(11 downto 0);
+	signal estado 	: std_logic_vector(3 downto 0);
 	
 begin 
-	gpu : entity work.gpu
+	top_line : entity work.top_line
 	port map(
 		Start => Start,
 		CLK => CLK,

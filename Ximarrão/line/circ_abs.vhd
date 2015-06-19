@@ -1,5 +1,4 @@
--- thu jun 18
--- gabriela
+
 -- iniando arquivo com código referente ao PO do 
 -- algoritmo abs
 

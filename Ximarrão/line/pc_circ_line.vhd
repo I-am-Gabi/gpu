@@ -20,7 +20,9 @@ entity pc_circ_line is
   		Sy0, Sx0 : out std_logic;
   		Ssx, Ssy : out std_logic;
   		Serr 	 : out std_logic_vector(1 downto 0);
-  		Setpixel : out std_logic;
+  		
+  		-- saida 
+  		Wren     : out std_logic;
 
 		-- comparadores
 		inComp1 : in std_logic; -- x0 == x1 && y0 == y1
@@ -181,7 +183,7 @@ begin
 	Ssy		  <= Fresul(4);
 	Serr(1)   <= Fresul(3);
 	Serr(0)   <= Fresul(2); 
-	Setpixel  <= Fresul(1);
+	Wren  	  <= Fresul(1);
 	Start_out <= Fresul(0);
 
 

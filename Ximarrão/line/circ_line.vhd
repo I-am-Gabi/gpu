@@ -30,7 +30,8 @@ entity circ_line is
 
 		-- params
 		Y0p, X0p : in std_logic_vector(31 downto 0); 
-		X1p, Y1p : in std_logic_vector(31 downto 0)
+		X1p, Y1p : in std_logic_vector(31 downto 0);
+		pixel : in std_logic_vector(11 downto 0)	
 		);
 end circ_line;
 
@@ -50,6 +51,8 @@ architecture circ_line of circ_line is
 	signal Fabs_in : std_logic_vector(31 downto 0);
 	signal Fabs_out : std_logic_vector(31 downto 0);
 begin
+	pixel <= "111100000000";
+
 	-- port map abs
 	s0 : entity work.circ_abs
 	port map (
@@ -85,8 +88,6 @@ begin
 	-- e2 < dx
 	Fcomp6 <= '1' when (signed(FRe2) < signed(FRdx))
 					else '0';
-
-
 
 	process (CLK)
 	begin

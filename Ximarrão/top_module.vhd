@@ -29,7 +29,7 @@ begin
 
     addr <= 0;
 
-    dut : entity work.vga
+    vga : entity work.vga
     port map (reset, clock_50, vga_hs, vga_vs, video_on);
  
     ram : entity work.ram
