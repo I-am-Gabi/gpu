@@ -29,11 +29,9 @@ begin
 
     addr <= 0;
 
-    -- port map para o modulo vga
-    vga : entity work.vga
+    dut : entity work.vga
     port map (reset, clock_50, vga_hs, vga_vs, video_on);
  
-    -- port map para o modelo da ram
     ram : entity work.ram
     port map (
         addr   => addr, 
