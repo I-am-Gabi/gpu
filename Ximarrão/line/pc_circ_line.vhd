@@ -8,7 +8,7 @@ entity pc_circ_line is
 		Start_out: out std_logic; -- start out
 		CLK  	 : in std_logic;  -- clock
 		Reset    : in std_logic;  -- reset
-		Busy     : out std_logic; -- busy 
+		-- Busy     : out std_logic; -- busy 
 
 		-- loads
   		Ly0, Lx0 : out std_logic;
@@ -30,7 +30,7 @@ entity pc_circ_line is
 		inComp3 : in std_logic; -- y0 < y1
 		inComp4 : in std_logic; -- dx > dy
 		inComp5 : in std_logic; -- e2 > -dx 
-		inComp6 : in std_logic -- e2 < dy	
+		inComp6 : in std_logic  -- e2 < dy	
 	);
 end pc_circ_line;
 
@@ -43,9 +43,18 @@ architecture pc_circ_line of pc_circ_line is
 	signal Fresul: std_logic_vector(15 downto 0);
 begin
 	with Reset select
-		F1 <= F2 when '1',
+		F1 <= F2 when '0',
 			"0000" when others;
 
+	--process(Start)
+	--begin
+	--	if Start = '0' then
+	--		Fa <= "0000";
+	--	else
+	--		Fa <= "0001";
+	--	end if;
+	--end process;
+	
 	with Start select
 		Fa <= "0000" when '0',
 			  "0001" when others;
@@ -58,11 +67,11 @@ begin
 
 	with inComp2 select
 		Fd <= "0101" when '0',
-			      "0110" when others;
+			  "0110" when others;
 
 	with inComp3 select
 		Ff <= "0111" when '0',
-			      "1111" when others;
+			  "1111" when others;
 	
 	Fh <= "1001";
 
@@ -85,14 +94,10 @@ begin
 		end if;
 	end process;
 
-	Fm <= "1101";
-
-	Fo <= "1111";
-
+	Fm <= "1101"; 
+	Fo <= "1111"; 
 	Fp <= "1001";
-
-
-
+ 
 	process(Freg)
 	begin
 		case Freg is
@@ -164,7 +169,7 @@ begin
 				Fresul <= "0100000001000000";
 			when "1110" =>
 				Fresul <= "0000001000001100";
-			when "1111" =>
+			when others =>
 				Fresul <= "1000000010000000";
 		end case;
 	end process;

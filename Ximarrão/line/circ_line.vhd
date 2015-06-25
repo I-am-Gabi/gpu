@@ -31,7 +31,7 @@ entity circ_line is
 		-- params
 		Y0p, X0p : in std_logic_vector(31 downto 0); 
 		X1p, Y1p : in std_logic_vector(31 downto 0);
-		pixel : in std_logic_vector(11 downto 0)	
+		pixel : out std_logic_vector(11 downto 0)	
 		);
 end circ_line;
 

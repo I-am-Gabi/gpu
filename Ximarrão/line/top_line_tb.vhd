@@ -9,59 +9,56 @@ architecture top_line_tb of top_line_tb is
 	signal Start: std_logic; -- start
 	signal Reset: std_logic; -- reset
 	signal CLK  : std_logic; -- clock
+	signal Wren : std_logic; -- wren
+	signal pixel: std_logic_vector(11 downto 0); -- pixel
 
 	-- parametros 
 	signal Y0p, X0p : std_logic_vector(31 downto 0); 
 	signal X1p, Y1p : std_logic_vector(31 downto 0);
 
-	signal addr 	: std_logic_vector(13 downto 0);
-	signal free 	: std_logic;
-	signal pixel_i 	: std_logic_vector(11 downto 0);
-	signal pixel_o 	: std_logic_vector(11 downto 0);
-	signal estado 	: std_logic_vector(3 downto 0);
-	
 begin 
 	top_line : entity work.top_line
 	port map(
-		Start => Start,
-		CLK => CLK,
-		Reset => Reset,
-		p_param => "000000001111",
-		x0_param => "0000010",
-		x1_param => "0001101",
-		y0_param => "0000010",
-		y1_param => "0001101",
-		wren => wren,
-		addr => addr,
-		estado => estado,
-		free => free,
-		pixel_i => pixel_i,
-		pixel_o => pixel_o
+		Start 	=> Start,
+		CLK 	=> CLK,
+		Reset 	=> Reset,
+		Wren 	=> Wren,
+		pixel	=> pixel,
+		Y0p 	=> "00000000000000000000000000000000",
+		X0p 	=> "00000000000000000000000000000000",
+		X1p 	=> "00000000000000000000000001100011",
+		Y1p 	=> "00000000000000000000000001100011"
 	);
 
 	process
 	begin
-		clock <= '0';
+		CLK <= '0';
 		wait for 1 ns;
-		clock <= '1';
+		CLK <= '1';
 		wait for 1 ns;
 	end process;
 	
 	process
 	begin
-		reset <= '1';
-		start <= '0';
-		wait until clock'event and clock = '1';
-		reset <= '0';
-		wait until clock'event and clock = '1';
+		Reset <= '1';
+		Start <= '0';
+
+		wait until CLK'event and CLK = '1';
 		
-		start <= '1';
-		wait until clock'event and clock = '1';
+		Reset <= '0';
+		Start <= '1';
+		wait until CLK'event and CLK = '1';
 		
-		start <= '0';
-		wait until clock'event and clock = '1';
-		
+		Start <= '0';
+
+		wait until CLK'event and CLK = '1';		
+		wait until CLK'event and CLK = '1';
+		wait until CLK'event and CLK = '1';
+		wait until CLK'event and CLK = '1';
+		wait until CLK'event and CLK = '1';
+		wait until CLK'event and CLK = '1';
+		wait until CLK'event and CLK = '1';
+		wait until CLK'event and CLK = '1';
 		wait;
-		
 	end process;
-end Line_alg_tb;
+end top_line_tb;
